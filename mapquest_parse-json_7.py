@@ -15,12 +15,12 @@ class MapQuest:
         orig = simpledialog.askstring(title="MapQuest",
                                       prompt="Starting Location: \t\t\t\t\t\t")
         if orig == "quit" or orig == "q":
-            print("Exiting the program...")
+            print("\u001b[31;1mExiting the program...\u001b[0m")
             break
         dest = simpledialog.askstring(title="MapQuest",
                                       prompt="Destination: \t\t\t\t\t\t")
         if dest == "quit" or dest == "q":
-            print("Exiting the program...")
+            print("\u001b[31;1mExiting the program...\u001b[0m")
             break
         url = main_api + urllib.parse.urlencode({"key":key, "from":orig, "to":dest})
 
@@ -30,26 +30,26 @@ class MapQuest:
         json_data = requests.get(url).json()
         json_status = json_data["info"]["statuscode"]
         if json_status == 0:
-            print("API Status: " + str(json_status) + " = A successful route call.\n")
+            print("\n\u001b[36;1mAPI Status: " + str(json_status) + " =\u001b[32;1m A successful route call.\u001b[0m")
             print("=============================================")
-            print("Directions from " + (orig) + " to " + (dest))
-            print("Trip Duration: " + (json_data["route"]["formattedTime"]))
-            print("Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)))
-            print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
+            print("\u001b[36;1mDirections from \u001b[0m" + "\u001b[32;1m" + (orig) + "\u001b[0m" + "\u001b[36;1m to \u001b[0m" + "\u001b[32;1m" + (dest) + "\u001b[0m" )
+            print("\u001b[36;1mTrip Duration: " + "\u001b[32;1m" + (json_data["route"]["formattedTime"]) + "\u001b[0m")
+            print("\u001b[36;1mKilometers: " + "\u001b[32;1m" + str("{:.2f}".format((json_data["route"]["distance"])*1.61)) + "\u001b[0m")
+            print("\u001b[36;1mFuel Used (Ltr): " + "\u001b[32;1m" + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)) + "\u001b[0m")
             print("=============================================")
             for each in json_data["route"]["legs"][0]["maneuvers"]:
                 print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
             print("=============================================\n")
         elif json_status == 402:
             print("**********************************************")
-            print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
+            print("\u001b[31mStatus Code: " + str(json_status) + "\u001b[0m; Invalid user inputs for one or both locations.")
             print("**********************************************\n")
         elif json_status == 611:
             print("**********************************************")
-            print("Status Code: " + str(json_status) + "; Missing an entry for one or both locations.")
+            print("\u001b[31mStatus Code: " + str(json_status) + "\u001b[0m; Missing an entry for one or both locations.")
             print("**********************************************\n")
         else:
             print("************************************************************************")
-            print("For Staus Code: " + str(json_status) + "; Refer to:")
+            print("\u001b[31mFor Staus Code: " + str(json_status) + "\u001b[0m; Refer to:")
             print("https://developer.mapquest.com/documentation/directions-api/status-codes")
             print("************************************************************************\n")
