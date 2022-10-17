@@ -27,7 +27,7 @@ while True:
         print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
         print("=============================================")
         for each in json_data["route"]["legs"][0]["maneuvers"]:
-            print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + "km " +  each["formattedTime"]))
+            print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + "km) " +  each["formattedTime"]))
         print("=============================================\n")
     elif json_status == 402: 
         print("**********************************************") 
