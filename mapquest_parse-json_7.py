@@ -39,6 +39,10 @@ while True:
         # Add a Scrollbar(horizontal)
         v = Scrollbar(root, orient='vertical')
         v.pack(side=RIGHT, fill='y')
+        # add label
+        l = Label(root, text=orig + " to " + dest)
+        l.config(font=("Courier", 14))
+
        
 
         root.mainloop()
