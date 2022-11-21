@@ -43,7 +43,15 @@ while True:
         l = Label(root, text=orig + " to " + dest)
         l.config(font=("Courier", 14))
 
-       
+        text = tk.Text(root, selectbackground="grey", yscrollcommand=v.set)
+        text.insert(INSERT, "API Status: " + str(json_status) + " A successful route call. \n")
+        for each in json_data["route"]["legs"][0]["maneuvers"]:
+            text.insert(INSERT, str(each["narrative"]) + " (" + str(each["distance"] * 1.61) + " km) \n")
+        l.pack()
+        text.pack()
+
+        # Attach the scrollbar with the text widget
+        v.config(command=text.yview)
 
         root.mainloop()
     elif json_status == 402:
